@@ -21,8 +21,8 @@ public class LanConfigActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_lan_config);
 
-        ip   = (EditText) findViewById(R.id.setIp);
-        port = (EditText) findViewById(R.id.setPort);
+        //ip   = (EditText) findViewById(R.id.setIp);
+        //port = (EditText) findViewById(R.id.setPort);
 
         loadConfig();
 
@@ -37,25 +37,25 @@ public class LanConfigActivity extends Activity {
 
     void saveConfig() {
 
-        SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
-
-        SharedPreferences.Editor editor = sharedPreferences.edit();
-        editor.putString(configReference, ip.getText().toString() + "port" + port.getText().toString());
-        editor.apply();
+//        SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
+//
+//        SharedPreferences.Editor editor = sharedPreferences.edit();
+//        editor.putString(configReference, ip.getText().toString() + "port" + port.getText().toString());
+//        editor.apply();
     }
 
     void loadConfig() {
-        SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
-        String conf = sharedPreferences.getString(configReference, "") ;
-        String _ip, _port;
-
-        if(conf != null && conf.contains("port"))
-        {
-           _ip   = conf.substring(0,conf.indexOf("port"));
-           _port = conf.substring(conf.indexOf("port")+4,conf.length());
-        }
-        else return;
-        ip.setText(_ip);
-        port.setText(_port);
+//        SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
+//        String conf = sharedPreferences.getString(configReference, "") ;
+//        String _ip, _port;
+//
+//        if(conf != null && conf.contains("port"))
+//        {
+//           _ip   = conf.substring(0,conf.indexOf("port"));
+//           _port = conf.substring(conf.indexOf("port")+4,conf.length());
+//        }
+//        else return;
+//        ip.setText(_ip);
+//        port.setText(_port);
     }
 }

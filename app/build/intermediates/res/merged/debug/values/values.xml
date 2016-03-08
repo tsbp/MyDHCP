@@ -298,6 +298,8 @@
     <!-- From: file:/E:/Github/Work/Android/MyDHCP/app/src/main/res/values/strings.xml -->
     <eat-comment/>
     <string name="Done"> Done</string>
+    <string name="SSID">SSID</string>
+    <string name="SSIDPAS">SSIDPAS</string>
     <!-- From: file:/E:/Github/Work/Android/MyDHCP/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.1.1/res/values/values.xml -->
     <eat-comment/>
     <string name="abc_action_bar_home_description">Navigate home</string>
@@ -321,7 +323,8 @@
     <string name="abc_toolbar_collapse_description">Collapse</string>
     <!-- From: file:/E:/Github/Work/Android/MyDHCP/app/src/main/res/values/strings.xml -->
     <eat-comment/>
-    <string name="action_settings">Settings</string>
+    <string name="action_settings">Настройки</string>
+    <string name="addrRange"> Диапазон адресов</string>
     <string name="app_name">Kotel(new)</string>
     <!-- From: file:/E:/Github/Work/Android/MyDHCP/app/build/intermediates/exploded-aar/com.android.support/design/23.1.1/res/values/values.xml -->
     <eat-comment/>
@@ -330,7 +333,6 @@
     <!-- From: file:/E:/Github/Work/Android/MyDHCP/app/src/main/res/values/strings.xml -->
     <eat-comment/>
     <string name="saved"> Saved</string>
-    <string name="setPort"> set port</string>
     <string name="setTemp"> Температура</string>
     <string name="setTime"> Начало периода</string>
     <!-- From: file:/E:/Github/Work/Android/MyDHCP/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.1.1/res/values/values.xml -->
