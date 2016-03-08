@@ -1,2 +1,2 @@
 <?xml version="1.0" encoding="utf-8"?>
-<merger version="3"><dataSet config="main"><source path="E:\MyDHCP\app\src\androidTest\res"/><source path="E:\MyDHCP\app\build\generated\res\rs\androidTest\debug"/><source path="E:\MyDHCP\app\build\generated\res\resValues\androidTest\debug"/></dataSet><mergedItems/></merger>
+<merger version="3"><dataSet config="main"><source path="E:\Github\Work\Android\MyDHCP\app\src\androidTest\res"/><source path="E:\Github\Work\Android\MyDHCP\app\build\generated\res\rs\androidTest\debug"/><source path="E:\Github\Work\Android\MyDHCP\app\build\generated\res\resValues\androidTest\debug"/></dataSet><mergedItems/></merger>

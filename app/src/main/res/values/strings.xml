@@ -6,4 +6,6 @@
     <string name="setTemp"> Температура</string>
     <string name="saved"> Saved</string>
     <string name="Done"> Done</string>
+    <string name="title_activity_lan_config"> Settings</string>
+    <string name="setPort"> set port</string>
 </resources>

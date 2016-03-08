@@ -57,4 +57,4 @@
         android:gravity="left|center_vertical"
         android:id="@+id/tvTemp" />
 
-</LinearLayout><!-- From: file:/E:/MyDHCP/app/src/main/res/layout/item.xml -->
+</LinearLayout><!-- From: file:/E:/Github/Work/Android/MyDHCP/app/src/main/res/layout/item.xml -->
