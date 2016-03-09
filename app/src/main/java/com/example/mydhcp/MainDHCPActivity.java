@@ -3,11 +3,13 @@ package com.example.mydhcp;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.media.Image;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.StrictMode;
+import android.preference.PreferenceManager;
 import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -92,6 +94,7 @@ public class MainDHCPActivity extends Activity
                 pbWait.setVisibility(View.VISIBLE);
                 BC_ACTION = "I1";
                 //UDPAction.BROADCAST_ACTION = BC_ACTION;
+                curIPbytes[3] = (byte)wifiRequest;
                 wifiRequestData(curIPbytes);
             }
         });
@@ -104,6 +107,9 @@ public class MainDHCPActivity extends Activity
             }
         });
         //==========================================================================================
+        getPreferences();
+
+        //==========================================================================================
         if(wifii.isWifiEnabled())
         {
             pbWait.setVisibility(View.VISIBLE);
@@ -111,8 +117,10 @@ public class MainDHCPActivity extends Activity
             curIPbytes[3] = (byte)wifiRequest;
             while (wifiRequest > wifiRequestLow && !wifiRequestData(curIPbytes)) {
                 wifiRequest--;
+                if(SearchIsComplete()) return;
                 curIPbytes[3] = (byte)wifiRequest;
             }
+
         }
         else
         {
@@ -155,12 +163,40 @@ public class MainDHCPActivity extends Activity
         mode = ESP8266_SEARCH;
     }
     //==============================================================================================
+    void getPreferences()
+    {
+        SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
+        String conf = sharedPreferences.getString(LanConfigActivity.configReference, "");
+        String ad;
+
+        if (conf != null && conf.contains("addrLow")) {
+            ad = conf.substring(conf.indexOf("addrLow") + 7, conf.indexOf("addrHigh"));
+            wifiRequestLow = Integer.parseInt(ad);
+            ad = conf.substring(conf.indexOf("addrHigh") + 8, conf.length());
+            wifiRequest = Integer.parseInt(ad);
+        }
+    }
+    //==============================================================================================
     private byte[] scan_network()
     {
         d=wifii.getDhcpInfo();
         byte[] ip_bytes = BigInteger.valueOf(d.dns1).toByteArray();
         byte[] ipAddr = new byte[]{ (byte)ip_bytes[3], (byte) ip_bytes[2], (byte) ip_bytes[1], (byte) ip_bytes[0]};
         return ipAddr;
+    }
+    //==============================================================================================
+   boolean  SearchIsComplete()
+    {
+        if(wifiRequest < wifiRequestLow)
+        {
+            pbWait.setVisibility(View.INVISIBLE);
+            Toast t = Toast.makeText(getApplicationContext(),
+                    "Device not found", Toast.LENGTH_LONG);
+            t.show();
+            getPreferences();
+            return true;
+        }
+        return false;
     }
     //==============================================================================================
     boolean wifiRequestData (byte[] aBytes)
@@ -213,6 +249,7 @@ public class MainDHCPActivity extends Activity
                     while(wifiRequest>=wifiRequestLow && !wifiRequestData(curIPbytes))
                     {
                         wifiRequest--;
+                        if(SearchIsComplete()) return;
                         curIPbytes[3] = (byte)wifiRequest;
                     }
                 }
@@ -239,6 +276,7 @@ public class MainDHCPActivity extends Activity
                         while(wifiRequest>wifiRequestLow && !wifiRequestData(curIPbytes))
                         {
                             wifiRequest--;
+                            if(SearchIsComplete()) return;
                             curIPbytes[3] = (byte)wifiRequest;
                         }
                     }
