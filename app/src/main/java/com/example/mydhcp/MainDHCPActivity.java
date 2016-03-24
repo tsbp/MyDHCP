@@ -70,7 +70,7 @@ public class MainDHCPActivity extends Activity
         mode = ESP8266_SEARCH;
 
         //info1 =  (TextView) findViewById(R.id.tv1);
-       // info2 =  (TextView) findViewById(R.id.tv2);
+        // info2 =  (TextView) findViewById(R.id.tv2);
         //tvData = (TextView) findViewById(R.id.tv3);
         pbWait = (ProgressBar) findViewById(R.id.progressBar);
 
@@ -80,7 +80,7 @@ public class MainDHCPActivity extends Activity
         outTemp = (TextView) findViewById(R.id.outTemp);
         outTemp.setShadowLayer(5, 2, 2, Color.BLACK);
 
-        inCanvas  = (com.example.mydhcp.plot) findViewById(R.id.inCanvas);
+        inCanvas = (com.example.mydhcp.plot) findViewById(R.id.inCanvas);
         outCanvas = (com.example.mydhcp.plot) findViewById(R.id.outCanvas);
 
         btnGetdata = (Button) findViewById(R.id.updtbtn);
@@ -88,14 +88,19 @@ public class MainDHCPActivity extends Activity
         setBtn = (Button) findViewById(R.id.setbtn);
         //==========================================================================================
         btnGetdata.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v)
-            {
+            public void onClick(View v) {
                 ndString = "";
                 pbWait.setVisibility(View.VISIBLE);
                 BC_ACTION = "I1";
                 //UDPAction.BROADCAST_ACTION = BC_ACTION;
-                curIPbytes[3] = (byte)wifiRequest;
-                wifiRequestData(curIPbytes);
+
+                if(mode == ESP8266_SEARCH) startLanSearch();
+                else
+                {
+                    wifiRequestData(curIPbytes);
+                    curIPbytes[3] = (byte) wifiRequest;
+                }
+
             }
         });
         //==========================================================================================
@@ -107,19 +112,19 @@ public class MainDHCPActivity extends Activity
             }
         });
         //==========================================================================================
+//        getPreferences();
+        startLanSearch();
+    }
+    //==============================================================================================
+    void startLanSearch()
+    {
         getPreferences();
-
-        //==========================================================================================
         if(wifii.isWifiEnabled())
         {
             pbWait.setVisibility(View.VISIBLE);
             curIPbytes = scan_network();
             curIPbytes[3] = (byte)wifiRequest;
-            while (wifiRequest > wifiRequestLow && !wifiRequestData(curIPbytes)) {
-                wifiRequest--;
-                if(SearchIsComplete()) return;
-                curIPbytes[3] = (byte)wifiRequest;
-            }
+            continueLanSearch();
 
         }
         else
@@ -129,6 +134,30 @@ public class MainDHCPActivity extends Activity
             t.show();
             btnStat.setBackgroundResource(R.drawable.wifi_off);
         }
+    }
+    //==============================================================================================
+    void continueLanSearch()
+    {
+        while(/*wifiRequest>=wifiRequestLow && */!wifiRequestData(curIPbytes))
+        {
+            wifiRequest--;
+            if(SearchIsComplete()) return;
+            curIPbytes[3] = (byte)wifiRequest;
+        }
+    }
+    //==============================================================================================
+    boolean  SearchIsComplete()
+    {
+        if(wifiRequest < wifiRequestLow)
+        {
+            pbWait.setVisibility(View.INVISIBLE);
+            Toast t = Toast.makeText(getApplicationContext(),
+                    "Device not found", Toast.LENGTH_LONG);
+            t.show();
+            //getPreferences();
+            return true;
+        }
+        return false;
     }
     //==============================================================================================
     @Override
@@ -184,20 +213,7 @@ public class MainDHCPActivity extends Activity
         byte[] ipAddr = new byte[]{ (byte)ip_bytes[3], (byte) ip_bytes[2], (byte) ip_bytes[1], (byte) ip_bytes[0]};
         return ipAddr;
     }
-    //==============================================================================================
-   boolean  SearchIsComplete()
-    {
-        if(wifiRequest < wifiRequestLow)
-        {
-            pbWait.setVisibility(View.INVISIBLE);
-            Toast t = Toast.makeText(getApplicationContext(),
-                    "Device not found", Toast.LENGTH_LONG);
-            t.show();
-            getPreferences();
-            return true;
-        }
-        return false;
-    }
+
     //==============================================================================================
     boolean wifiRequestData (byte[] aBytes)
     {
@@ -246,12 +262,7 @@ public class MainDHCPActivity extends Activity
                     //info1.setText(ndString);
                     wifiRequest--;
                     curIPbytes[3] = (byte)wifiRequest;
-                    while(wifiRequest>=wifiRequestLow && !wifiRequestData(curIPbytes))
-                    {
-                        wifiRequest--;
-                        if(SearchIsComplete()) return;
-                        curIPbytes[3] = (byte)wifiRequest;
-                    }
+                    continueLanSearch();
                 }
                 else
                 {
@@ -273,12 +284,7 @@ public class MainDHCPActivity extends Activity
                         //info1.setText(ndString);
                         if(wifiRequest>wifiRequestLow) wifiRequest--;
                         curIPbytes[3] = (byte)wifiRequest;
-                        while(wifiRequest>wifiRequestLow && !wifiRequestData(curIPbytes))
-                        {
-                            wifiRequest--;
-                            if(SearchIsComplete()) return;
-                            curIPbytes[3] = (byte)wifiRequest;
-                        }
+                        continueLanSearch();
                     }
                 }
                 break;
