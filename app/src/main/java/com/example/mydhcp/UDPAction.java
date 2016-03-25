@@ -22,8 +22,9 @@ public class UDPAction extends AsyncTask<Void, Void, Void> {
         protected void onPreExecute() {
             super.onPreExecute();
 
-            if(MainDHCPActivity.mode == 3) BROADCAST_ACTION = settingsActivity.REQUEST_ACTION;
-            else BROADCAST_ACTION = MainDHCPActivity.BC_ACTION;
+            if      (MainDHCPActivity.mode == 3) BROADCAST_ACTION = settingsActivity.REQUEST_ACTION;
+            else if (MainDHCPActivity.mode == 4) BROADCAST_ACTION = LanConfigActivity.REQUEST_ACTION;
+            else                                 BROADCAST_ACTION = MainDHCPActivity.BC_ACTION;
 
             if(BROADCAST_ACTION.contains("I1"))
             {

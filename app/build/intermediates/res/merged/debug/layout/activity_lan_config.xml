@@ -18,7 +18,7 @@
     <EditText
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:inputType="phone"
+        android:inputType="text"
         android:ems="10"
         android:id="@+id/setSSID"
         android:layout_below="@+id/textView"
@@ -40,7 +40,7 @@
         android:layout_width="100dp"
         android:layout_height="wrap_content"
         android:inputType="phone"
-        android:text="7777"
+        android:text="100"
         android:ems="10"
         android:id="@+id/addrLow"
         android:layout_below="@+id/textView2"
@@ -59,12 +59,12 @@
         android:layout_width="100dp"
         android:layout_height="wrap_content"
         android:inputType="phone"
-        android:text="7777"
+        android:text="110"
         android:ems="10"
         android:id="@+id/addrHigh"
         android:layout_below="@+id/textView2"
-        android:layout_toLeftOf="@+id/okBtn"
-        android:layout_toStartOf="@+id/okBtn" />
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true" />
 
     <TextView
         android:text="@string/SSIDPAS"
@@ -78,7 +78,7 @@
     <EditText
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:inputType="phone"
+        android:inputType="text"
         android:ems="10"
         android:id="@+id/setSSIDPAS"
         android:layout_below="@+id/textView3"
@@ -96,4 +96,4 @@
         android:checked="false" />
 
 </RelativeLayout>
-<!-- From: file:/E:/Github/Work/Android/MyDHCP/app/src/main/res/layout/activity_lan_config.xml -->
+<!-- From: file:/C:/Users/notebook/Documents/GitHub/MyDHCP/app/src/main/res/layout/activity_lan_config.xml -->
