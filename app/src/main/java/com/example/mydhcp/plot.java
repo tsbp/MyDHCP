@@ -46,8 +46,8 @@ public class plot extends View {
         super.onDraw(canvas);
         canvas.drawARGB(aColor[0], aColor[1], aColor[2], aColor[3]); //set canvas background
 
-        AREA_WIDTH = canvas.getWidth();
-        AREA_HEIGH = canvas.getHeight();
+        AREA_WIDTH = canvas.getWidth()  & 0x0000ffff;
+        AREA_HEIGH = canvas.getHeight() & 0x0000ffff;
 
         int PLOT_WIDTH    =   (AREA_WIDTH - X_OFFSET);
         int PLOT_HEIGH    =   (AREA_HEIGH - Y_OFFSET);

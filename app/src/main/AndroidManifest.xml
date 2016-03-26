@@ -41,6 +41,11 @@
             android:label="@string/title_activity_lan_config"
             android:screenOrientation="portrait">
         </activity>
+        <activity
+            android:name=".ustanovki"
+            android:label="@string/ustanovki"
+            android:screenOrientation="portrait">
+        </activity>
     </application>
 
 </manifest>

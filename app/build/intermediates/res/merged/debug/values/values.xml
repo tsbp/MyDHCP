@@ -323,7 +323,6 @@
     <string name="abc_toolbar_collapse_description">Collapse</string>
     <!-- From: file:/C:/Users/notebook/Documents/GitHub/MyDHCP/app/src/main/res/values/strings.xml -->
     <eat-comment/>
-    <string name="action_settings">Настройки</string>
     <string name="addrRange"> Диапазон адресов</string>
     <string name="app_name">Kotel(new)</string>
     <!-- From: file:/C:/Users/notebook/Documents/GitHub/MyDHCP/app/build/intermediates/exploded-aar/com.android.support/design/23.1.1/res/values/values.xml -->
@@ -332,6 +331,8 @@
     <string name="character_counter_pattern" translatable="false">%1$d / %2$d</string>
     <!-- From: file:/C:/Users/notebook/Documents/GitHub/MyDHCP/app/src/main/res/values/strings.xml -->
     <eat-comment/>
+    <string name="espSettings">Установки</string>
+    <string name="lanSettings">Сеть</string>
     <string name="saved"> Saved</string>
     <string name="setTemp"> Температура</string>
     <string name="setTime"> Начало периода</string>

@@ -2236,7 +2236,6 @@ containing a value of this type.
         public static final int action_mode_bar=0x7f0c0057;
         public static final int action_mode_bar_stub=0x7f0c0056;
         public static final int action_mode_close_button=0x7f0c003c;
-        public static final int action_settings=0x7f0c00a6;
         public static final int activity_chooser_view_content=0x7f0c003d;
         public static final int addrHigh=0x7f0c006e;
         public static final int addrLow=0x7f0c006a;
@@ -2279,6 +2278,7 @@ containing a value of this type.
         public static final int end_padder=0x7f0c00a5;
         public static final int enterAlways=0x7f0c0015;
         public static final int enterAlwaysCollapsed=0x7f0c0016;
+        public static final int espSettings=0x7f0c00a7;
         public static final int espbtn=0x7f0c0074;
         public static final int exitUntilCollapsed=0x7f0c0017;
         public static final int expand_activities_button=0x7f0c003e;
@@ -2299,6 +2299,7 @@ containing a value of this type.
         public static final int ivDay=0x7f0c0097;
         public static final int ivTemp=0x7f0c0094;
         public static final int ivTime=0x7f0c0092;
+        public static final int lanSettings=0x7f0c00a6;
         public static final int left=0x7f0c0022;
         public static final int line1=0x7f0c009e;
         public static final int line3=0x7f0c00a2;
@@ -2483,17 +2484,18 @@ containing a value of this type.
         public static final int abc_shareactionprovider_share_with=0x7f060010;
         public static final int abc_shareactionprovider_share_with_application=0x7f060011;
         public static final int abc_toolbar_collapse_description=0x7f060012;
-        public static final int action_settings=0x7f060017;
-        public static final int addrRange=0x7f060018;
-        public static final int app_name=0x7f060019;
-        public static final int appbar_scrolling_view_behavior=0x7f06001a;
-        public static final int character_counter_pattern=0x7f06001b;
-        public static final int saved=0x7f06001c;
-        public static final int setTemp=0x7f06001d;
-        public static final int setTime=0x7f06001e;
+        public static final int addrRange=0x7f060017;
+        public static final int app_name=0x7f060018;
+        public static final int appbar_scrolling_view_behavior=0x7f060019;
+        public static final int character_counter_pattern=0x7f06001a;
+        public static final int espSettings=0x7f06001b;
+        public static final int lanSettings=0x7f06001c;
+        public static final int saved=0x7f06001d;
+        public static final int setTemp=0x7f06001e;
+        public static final int setTime=0x7f06001f;
         public static final int status_bar_notification_info_overflow=0x7f060013;
-        public static final int title_activity_lan_config=0x7f06001f;
-        public static final int title_activity_settings=0x7f060020;
+        public static final int title_activity_lan_config=0x7f060020;
+        public static final int title_activity_settings=0x7f060021;
     }
     public static final class style {
         public static final int AlertDialog_AppCompat=0x7f09007f;
