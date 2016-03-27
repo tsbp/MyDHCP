@@ -2255,7 +2255,7 @@ containing a value of this type.
         public static final int center_horizontal=0x7f0c001e;
         public static final int center_vertical=0x7f0c001f;
         public static final int chbDay=0x7f0c0097;
-        public static final int chbSensSwap=0x7f0c00a5;
+        public static final int chbSensSwap=0x7f0c00a6;
         public static final int checkbox=0x7f0c0052;
         public static final int chronometer=0x7f0c009f;
         public static final int clip_horizontal=0x7f0c002b;
@@ -2273,12 +2273,13 @@ containing a value of this type.
         public static final int design_menu_item_text=0x7f0c008d;
         public static final int design_navigation_view=0x7f0c008c;
         public static final int disableHome=0x7f0c000e;
+        public static final int editText=0x7f0c00a5;
         public static final int edit_query=0x7f0c005c;
         public static final int end=0x7f0c0020;
         public static final int end_padder=0x7f0c00a4;
         public static final int enterAlways=0x7f0c0015;
         public static final int enterAlwaysCollapsed=0x7f0c0016;
-        public static final int espSettings=0x7f0c00a7;
+        public static final int espSettings=0x7f0c00a8;
         public static final int espbtn=0x7f0c0073;
         public static final int exitUntilCollapsed=0x7f0c0017;
         public static final int expand_activities_button=0x7f0c003e;
@@ -2299,7 +2300,7 @@ containing a value of this type.
         public static final int ivDay=0x7f0c0096;
         public static final int ivTemp=0x7f0c0093;
         public static final int ivTime=0x7f0c0091;
-        public static final int lanSettings=0x7f0c00a6;
+        public static final int lanSettings=0x7f0c00a7;
         public static final int left=0x7f0c0022;
         public static final int line1=0x7f0c009d;
         public static final int line3=0x7f0c00a1;
@@ -2489,15 +2490,16 @@ containing a value of this type.
         public static final int app_name=0x7f060018;
         public static final int appbar_scrolling_view_behavior=0x7f060019;
         public static final int character_counter_pattern=0x7f06001a;
-        public static final int espSettings=0x7f06001b;
-        public static final int lanSettings=0x7f06001c;
-        public static final int saved=0x7f06001d;
-        public static final int setTemp=0x7f06001e;
-        public static final int setTime=0x7f06001f;
+        public static final int delta=0x7f06001b;
+        public static final int espSettings=0x7f06001c;
+        public static final int lanSettings=0x7f06001d;
+        public static final int saved=0x7f06001e;
+        public static final int setTemp=0x7f06001f;
+        public static final int setTime=0x7f060020;
         public static final int status_bar_notification_info_overflow=0x7f060013;
-        public static final int title_activity_lan_config=0x7f060020;
-        public static final int title_activity_settings=0x7f060021;
-        public static final int ustanovki=0x7f060022;
+        public static final int title_activity_lan_config=0x7f060021;
+        public static final int title_activity_settings=0x7f060022;
+        public static final int ustanovki=0x7f060023;
     }
     public static final class style {
         public static final int AlertDialog_AppCompat=0x7f09007f;

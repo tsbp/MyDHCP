@@ -331,6 +331,7 @@
     <string name="character_counter_pattern" translatable="false">%1$d / %2$d</string>
     <!-- From: file:/E:/Github/MyDHCP/app/src/main/res/values/strings.xml -->
     <eat-comment/>
+    <string name="delta">Дельта</string>
     <string name="espSettings">Установки</string>
     <string name="lanSettings">Сеть</string>
     <string name="saved"> Saved</string>
