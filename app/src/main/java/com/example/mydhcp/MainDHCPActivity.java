@@ -174,25 +174,19 @@ public class MainDHCPActivity extends Activity
         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
-
+        Intent intent;
 
         switch(item.getItemId())
         {
             case  R.id.lanSettings:
-                Intent intent = new Intent(MainDHCPActivity.this, LanConfigActivity.class);
+                intent = new Intent(MainDHCPActivity.this, LanConfigActivity.class);
                 startActivity(intent);
                 break;
             case  R.id.espSettings:
-
+                intent = new Intent(MainDHCPActivity.this, ustanovki.class);
+                startActivity(intent);
                 break;
         }
-
-
-
-//        //noinspection SimplifiableIfStatement
-//        if (id == R.id.action_settings) {
-//            return true;
-//        }
 
         return super.onOptionsItemSelected(item);
     }

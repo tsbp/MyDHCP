@@ -85,15 +85,7 @@
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true" />
 
-    <CheckBox
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Поменять местами датчики температуры"
-        android:id="@+id/chbSensSwap"
-        android:layout_below="@+id/setSSIDPAS"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:checked="false" />
+
 
 </RelativeLayout>
-<!-- From: file:/C:/Users/notebook/Documents/GitHub/MyDHCP/app/src/main/res/layout/activity_lan_config.xml -->
+<!-- From: file:/E:/Github/MyDHCP/app/src/main/res/layout/activity_lan_config.xml -->
