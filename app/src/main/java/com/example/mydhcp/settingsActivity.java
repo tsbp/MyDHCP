@@ -39,6 +39,8 @@ public class settingsActivity extends Activity {
     TextView dayType, tvResp;
     String sDayType, weekString ;
 
+    Button bAdd, bDel;
+
 
     public static String REQUEST_ACTION;
 
@@ -59,8 +61,8 @@ public class settingsActivity extends Activity {
         Button bSave = (Button) findViewById(R.id.btnSave);
         Button bLoad = (Button) findViewById(R.id.btnLoad);
         Button bLoadHolly = (Button) findViewById(R.id.btnLoadHolly);
-        Button bAdd  = (Button) findViewById(R.id.btnAdd);
-        Button bDel  = (Button) findViewById(R.id.btnDel);
+        bAdd  = (Button) findViewById(R.id.btnAdd);
+        bDel  = (Button) findViewById(R.id.btnDel);
         Button bWeek = (Button) findViewById(R.id.btnWeek);
         //================================================
         bSave.setOnClickListener(new View.OnClickListener() {
@@ -119,7 +121,7 @@ public class settingsActivity extends Activity {
                 wifiRequestData(MainDHCPActivity.curIPbytes);
             }
         });
-        //TODO: disable btnAdd and btnDel functions at week configure mode
+
         //================================================
         bAdd.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
@@ -299,6 +301,8 @@ public class settingsActivity extends Activity {
     void dataProcessing (String aStr)
     {
         tvResp.setText(aStr);
+        bAdd.setEnabled(true);
+        bDel.setEnabled(true);
 
         switch(mode)
         {
@@ -312,6 +316,8 @@ public class settingsActivity extends Activity {
                 break;
 
             case MODE_RECEIVE_WEEK:
+                bAdd.setEnabled(false);
+                bDel.setEnabled(false);
                 receiveWeek(aStr.substring(aStr.indexOf("data:") + 5, aStr.length()));
                 break;
 

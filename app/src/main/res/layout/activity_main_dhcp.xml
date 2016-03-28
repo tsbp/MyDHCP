@@ -15,6 +15,7 @@
         android:layout_height="80dp"
         android:id="@+id/setbtn"
         android:background="@drawable/setbutton"
+        android:enabled="false"
         android:layout_alignParentBottom="true"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true" />
@@ -24,6 +25,7 @@
         android:layout_height="80dp"
         android:id="@+id/updtbtn"
         android:background="@drawable/update"
+        android:enabled="false"
         android:layout_alignParentBottom="true"
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true" />
@@ -91,10 +93,6 @@
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_gravity="center_horizontal"
-            android:indeterminate="false"
-            android:layout_below="@+id/inTemp"
-            android:layout_alignParentRight="true"
-            android:layout_alignParentEnd="true"
             android:layout_weight="1" />
 
         <com.example.mydhcp.plot
@@ -104,9 +102,6 @@
             android:layout_height="0dp"
             android:layout_gravity="center_horizontal"
             android:indeterminate="false"
-            android:layout_below="@+id/inCanvas"
-            android:layout_alignParentRight="true"
-            android:layout_alignParentEnd="true"
             android:layout_weight="1" />
 
     </LinearLayout>

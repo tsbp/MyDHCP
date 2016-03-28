@@ -5,8 +5,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
-import android.media.Image;
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.StrictMode;
 import android.preference.PreferenceManager;
@@ -35,8 +33,8 @@ import java.util.Locale;
 
 public class MainDHCPActivity extends Activity
 {
-    TextView info1, info2,tvData, inTemp, outTemp, setBtn;
-    Button btnGetdata, btnStat;
+    TextView info1, info2,tvData, inTemp, outTemp;
+    Button btnGetdata, btnStat,setBtn;
     DhcpInfo d;
     WifiManager wifii;
     ProgressBar pbWait;
@@ -174,7 +172,7 @@ public class MainDHCPActivity extends Activity
         // Handle action bar item clicks here. The action bar will
         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
+        //int id = item.getItemId();
         Intent intent;
 
         switch(item.getItemId())
@@ -285,6 +283,8 @@ public class MainDHCPActivity extends Activity
                                 "Connected", Toast.LENGTH_SHORT);
                         t.setGravity(Gravity.BOTTOM, 0, 0);
                         t.show();
+                        setBtn.setEnabled(true);
+                        btnGetdata.setEnabled(true);
                     }
                     else
                     {
@@ -366,7 +366,7 @@ public class MainDHCPActivity extends Activity
         int bCounter = 0;
         for(int k = 0; k < 4; k++)
         {
-            int l = aDataString.length();
+           // int l = aDataString.length();
             String tmpStr = aDataString.substring(k*30, k*30 + 30);//30 = 4+6*4+2
             if(tmpStr.substring(0,1).contains(aDataRef))
             {
