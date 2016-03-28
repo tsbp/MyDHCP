@@ -7,7 +7,7 @@
         android:text="@string/delta"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/timeHead"
+        android:id="@+id/delta_name"
         android:layout_marginTop="50dp"
         android:layout_gravity="center_horizontal" />
 
@@ -16,7 +16,7 @@
         android:layout_height="wrap_content"
         android:inputType="numberDecimal"
         android:ems="10"
-        android:id="@+id/editText"
+        android:id="@+id/delta"
         android:layout_gravity="center_horizontal" />
 
     <CheckBox
@@ -24,9 +24,6 @@
         android:layout_height="wrap_content"
         android:text="Поменять местами датчики температуры"
         android:id="@+id/chbSensSwap"
-        android:layout_below="@+id/setSSIDPAS"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
         android:checked="false"
         android:layout_marginTop="20dp" />
 
@@ -42,4 +39,4 @@
         android:layout_gravity="center_horizontal"
         android:layout_marginTop="50dp" />
 
-</LinearLayout><!-- From: file:/E:/Github/MyDHCP/app/src/main/res/layout/ustanovki.xml -->
+</LinearLayout><!-- From: file:/C:/Users/notebook/Documents/GitHub/MyDHCP/app/src/main/res/layout/ustanovki.xml -->

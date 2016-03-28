@@ -4,6 +4,7 @@ import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
+import android.os.Build;
 import android.util.AttributeSet;
 import android.view.View;
 
@@ -46,8 +47,13 @@ public class plot extends View {
         super.onDraw(canvas);
         canvas.drawARGB(aColor[0], aColor[1], aColor[2], aColor[3]); //set canvas background
 
-        AREA_WIDTH = canvas.getWidth()  & 0x0000ffff;
-        AREA_HEIGH = canvas.getHeight() & 0x0000ffff;
+        AREA_WIDTH = canvas.getWidth();
+        AREA_HEIGH = canvas.getHeight();
+
+        if (android.os.Build.VERSION.SDK_INT <= Build.VERSION_CODES.JELLY_BEAN)
+        {
+            AREA_HEIGH = (AREA_HEIGH - 485)/2;
+        }
 
         int PLOT_WIDTH    =   (AREA_WIDTH - X_OFFSET);
         int PLOT_HEIGH    =   (AREA_HEIGH - Y_OFFSET);

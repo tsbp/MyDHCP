@@ -50,7 +50,8 @@ public class MainDHCPActivity extends Activity
     final int ESP8266_SEARCH = 0;
     final int ESP8266_DATA_RECEIVE = 1;
     final int ESP8266_CONFIG = 3;
-    final int ESP8266_NASTR = 4;
+    final int ESP8266_LANSET = 4;
+    final int ESP8266_UST = 5;
     public static int mode;
 
     final boolean IP_IS_REACHABLE = true;
