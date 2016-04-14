@@ -1,6 +1,8 @@
 package com.example.mydhcp;
 
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
@@ -135,38 +137,39 @@ public class settingsActivity extends Activity {
                             tmpTime.add(time[k]);
                             tmpTemp.add(temp[k]);
                         }
-                    tmpTime.add("??:??");
-                    tmpTemp.add("??.?");
+                    tmpTime.add("00:00");
+                    tmpTemp.add("19.0");
 
                     time = new String[tmpTime.size()];
                     temp = new String[tmpTemp.size()];
 
                     tmpTime.toArray(time);
                     tmpTemp.toArray(temp);
+                    sortByTime();
                     updateListviewTemperature();
                 }
             }
         });
         //================================================
-        bDel.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
-                if (time != null) {
-                    List<String> tmpTime = new ArrayList<>();
-                    List<String> tmpTemp = new ArrayList<>();
-                    for (int k = 0; k < (time.length - 1); k++) {
-                        tmpTime.add(time[k]);
-                        tmpTemp.add(temp[k]);
-                    }
-                    time = new String[tmpTime.size()];
-                    temp = new String[tmpTemp.size()];
-
-                    tmpTime.toArray(time);
-                    tmpTemp.toArray(temp);
-                    updateListviewTemperature();
-                }
-
-            }
-        });
+//        bDel.setOnClickListener(new View.OnClickListener() {
+//            public void onClick(View v) {
+//                if (time != null) {
+//                    List<String> tmpTime = new ArrayList<>();
+//                    List<String> tmpTemp = new ArrayList<>();
+//                    for (int k = 0; k < (time.length - 1); k++) {
+//                        tmpTime.add(time[k]);
+//                        tmpTemp.add(temp[k]);
+//                    }
+//                    time = new String[tmpTime.size()];
+//                    temp = new String[tmpTemp.size()];
+//
+//                    tmpTime.toArray(time);
+//                    tmpTemp.toArray(temp);
+//                    updateListviewTemperature();
+//                }
+//
+//            }
+//        });
     }
     //==============================================================================================
     boolean wifiRequestData (byte[] aBytes)
@@ -201,10 +204,10 @@ public class settingsActivity extends Activity {
         if (data == null) {
             return;
         }
-        String aTime = data.getStringExtra("rTime");
-        String aTemp = data.getStringExtra("rTemp");
-        time[selectedRow] = aTime;
-        temp[selectedRow] = aTemp;
+
+        time[selectedRow] = data.getStringExtra("rTime");;
+        temp[selectedRow] =  data.getStringExtra("rTemp");
+        sortByTime();
         updateListviewTemperature();
     }
     //==============================================================================================
@@ -222,6 +225,27 @@ public class settingsActivity extends Activity {
     final String ATTRIBUTE_NAME_REF = "ref";
     final String ATTRIBUTE_NAME_TIME = "time";
     final String ATTRIBUTE_NAME_TEMP = "temper";
+    //==============================================================================================
+    void sortByTime()
+    {
+        for(int i = 0; i < time.length; i++)
+        {
+            for(int j = i+1; j < time.length; j++)
+            {
+                String tStrA = time[i].toString().replace(":","");
+                String tStrB = time[j].toString().replace(":","");
+                if (Integer.valueOf(tStrA) > Integer.valueOf(tStrB))
+                {
+                    String t = time[i];
+                    time[i] = time[j];
+                    time[j] = t;
+                    String tt = temp[i];
+                    temp[i] = temp[j];
+                    temp[j]= tt;
+                }
+            }
+        }
+    }
     //==============================================================================================
     void updateListviewTemperature()
     {
@@ -251,6 +275,42 @@ public class settingsActivity extends Activity {
                 intent.putExtra("pTime", time[position]);
                 intent.putExtra("pTemp", temp[position]);
                 startActivityForResult(intent, 1);
+            }
+        });
+        //==========================================================
+        lvMain.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
+            public boolean onItemLongClick(AdapterView<?> parent, View view,
+                                           final int position, long id) {
+                selectedRow = position;
+                AlertDialog.Builder adb=new AlertDialog.Builder(settingsActivity.this);
+                adb.setTitle("Delete?");
+                adb.setMessage("Удалить период " + (position+1) + "?");
+                final int positionToRemove = position;
+                adb.setNegativeButton("Cancel", null);
+                adb.setPositiveButton("Ok", new AlertDialog.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+                        if (time != null) {
+                            List<String> tmpTime = new ArrayList<>();
+                            List<String> tmpTemp = new ArrayList<>();
+                            for (int k = 0; k < position; k++) {
+                                tmpTime.add(time[k]);
+                                tmpTemp.add(temp[k]);
+                            }
+                            for (int k = position + 1; k < time.length; k++) {
+                                tmpTime.add(time[k]);
+                                tmpTemp.add(temp[k]);
+                            }
+                            time = new String[tmpTime.size()];
+                            temp = new String[tmpTemp.size()];
+
+                            tmpTime.toArray(time);
+                            tmpTemp.toArray(temp);
+                            sortByTime();
+                            updateListviewTemperature();
+                        }
+                    }});
+                adb.show();
+                return true;
             }
         });
     }
