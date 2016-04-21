@@ -41,7 +41,7 @@ public class settingsActivity extends Activity {
     TextView dayType, tvResp;
     String sDayType, weekString ;
 
-    Button bAdd, bDel;
+    Button bAdd;//, bDel;
 
 
     public static String REQUEST_ACTION;
@@ -64,7 +64,7 @@ public class settingsActivity extends Activity {
         Button bLoad = (Button) findViewById(R.id.btnLoad);
         Button bLoadHolly = (Button) findViewById(R.id.btnLoadHolly);
         bAdd  = (Button) findViewById(R.id.btnAdd);
-        bDel  = (Button) findViewById(R.id.btnDel);
+        //bDel  = (Button) findViewById(R.id.btnDel);
         Button bWeek = (Button) findViewById(R.id.btnWeek);
         //================================================
         bSave.setOnClickListener(new View.OnClickListener() {
@@ -205,7 +205,7 @@ public class settingsActivity extends Activity {
             return;
         }
 
-        time[selectedRow] = data.getStringExtra("rTime");;
+        time[selectedRow] =  data.getStringExtra("rTime");
         temp[selectedRow] =  data.getStringExtra("rTemp");
         sortByTime();
         updateListviewTemperature();
@@ -285,7 +285,7 @@ public class settingsActivity extends Activity {
                 AlertDialog.Builder adb=new AlertDialog.Builder(settingsActivity.this);
                 adb.setTitle("Delete?");
                 adb.setMessage("Удалить период " + (position+1) + "?");
-                final int positionToRemove = position;
+                //final int positionToRemove = position;
                 adb.setNegativeButton("Cancel", null);
                 adb.setPositiveButton("Ok", new AlertDialog.OnClickListener() {
                     public void onClick(DialogInterface dialog, int which) {
@@ -362,7 +362,7 @@ public class settingsActivity extends Activity {
     {
         tvResp.setText(aStr);
         bAdd.setEnabled(true);
-        bDel.setEnabled(true);
+        //bDel.setEnabled(true);
 
         switch(mode)
         {
@@ -377,7 +377,7 @@ public class settingsActivity extends Activity {
 
             case MODE_RECEIVE_WEEK:
                 bAdd.setEnabled(false);
-                bDel.setEnabled(false);
+                //bDel.setEnabled(false);
                 receiveWeek(aStr.substring(aStr.indexOf("data:") + 5, aStr.length()));
                 break;
 

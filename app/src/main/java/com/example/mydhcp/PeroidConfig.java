@@ -1,29 +1,24 @@
 package com.example.mydhcp;
 
 import android.app.Activity;
-import android.app.Dialog;
 import android.app.TimePickerDialog;
-import android.app.TimePickerDialog.OnTimeSetListener;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
-import android.widget.EditText;
+import android.widget.SeekBar;
 import android.widget.TextView;
 import android.widget.TimePicker;
-
 import java.util.Calendar;
 
 
 public class PeroidConfig extends Activity /*implements OnClickListener*/ {
 
 
+    SeekBar  tmpSeekBar;
     TextView etTime;
-    EditText etTemp;
-    int myHour = 14;
-    int myMinute = 35;
-    int DIALOG_TIME = 1;
+    TextView etTemp;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,8 +27,11 @@ public class PeroidConfig extends Activity /*implements OnClickListener*/ {
 
 
 
-        final TextView etTime = (TextView)findViewById(R.id.setTime);
-        final EditText etTemp = (EditText)findViewById(R.id.setTemp);
+        etTime = (TextView)findViewById(R.id.setTime);
+        etTemp = (TextView)findViewById(R.id.setTemp);
+
+
+        tmpSeekBar = (SeekBar) findViewById(R.id.seekBar);
 
         Intent intent = getIntent();
 
@@ -42,6 +40,8 @@ public class PeroidConfig extends Activity /*implements OnClickListener*/ {
 
         etTime.setText(time);
         etTemp.setText(temp);
+
+        tmpSeekBar.setProgress((int) (((Float.valueOf(etTemp.getText().toString())) - 19) * 10));
 
         etTime.setOnClickListener(new OnClickListener() {
             @Override
@@ -54,11 +54,28 @@ public class PeroidConfig extends Activity /*implements OnClickListener*/ {
                 mTimePicker = new TimePickerDialog(PeroidConfig.this, new TimePickerDialog.OnTimeSetListener() {
                     @Override
                     public void onTimeSet(TimePicker timePicker, int selectedHour, int selectedMinute) {
-                        etTime.setText( selectedHour + ":" + selectedMinute);
+                        etTime.setText(String.format("%02d",selectedHour) + ":" + String.format("%02d",selectedMinute));
                     }
                 }, hour, minute, true);//Yes 24 hour time
                 mTimePicker.setTitle("Select Time");
                 mTimePicker.show();
+            }
+        });
+
+        tmpSeekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+            @Override
+            public void onStopTrackingTouch(SeekBar seekBar) {
+            }
+
+            @Override
+            public void onStartTrackingTouch(SeekBar seekBar) {
+            }
+
+            @Override
+            public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
+                String s = String.format("%2.1f", (0.1 * progress + 19));
+                s = s.replace(',','.');
+                etTemp.setText( s );
             }
         });
 
