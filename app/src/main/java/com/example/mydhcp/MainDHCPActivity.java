@@ -154,6 +154,7 @@ public class MainDHCPActivity extends Activity
             Toast t = Toast.makeText(getApplicationContext(),
                     "Device not found", Toast.LENGTH_LONG);
             t.show();
+            btnGetdata.setEnabled(true);
             //getPreferences();
             return true;
         }
