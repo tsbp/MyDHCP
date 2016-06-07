@@ -2244,7 +2244,6 @@ containing a value of this type.
         public static final int beginning=0x7f0c0030;
         public static final int bottom=0x7f0c001c;
         public static final int btnAdd=0x7f0c0082;
-        public static final int btnDel=0x7f0c0081;
         public static final int btnLoad=0x7f0c0084;
         public static final int btnLoadHolly=0x7f0c0085;
         public static final int btnSave=0x7f0c0083;
@@ -2265,7 +2264,7 @@ containing a value of this type.
         public static final int contentPanel=0x7f0c004a;
         public static final int custom=0x7f0c0050;
         public static final int customPanel=0x7f0c004f;
-        public static final int dayType=0x7f0c007f;
+        public static final int dayType=0x7f0c0080;
         public static final int decor_content_parent=0x7f0c0058;
         public static final int default_activity_button=0x7f0c0040;
         public static final int delta=0x7f0c00a6;
@@ -2307,7 +2306,7 @@ containing a value of this type.
         public static final int line3=0x7f0c00a1;
         public static final int listMode=0x7f0c000b;
         public static final int list_item=0x7f0c0041;
-        public static final int lvMain=0x7f0c0080;
+        public static final int lvMain=0x7f0c0081;
         public static final int media_actions=0x7f0c009b;
         public static final int middle=0x7f0c0031;
         public static final int mini=0x7f0c002f;
@@ -2346,6 +2345,7 @@ containing a value of this type.
         public static final int search_plate=0x7f0c0062;
         public static final int search_src_text=0x7f0c0063;
         public static final int search_voice_btn=0x7f0c0067;
+        public static final int seekBar=0x7f0c007f;
         public static final int select_dialog_listview=0x7f0c0068;
         public static final int setSSID=0x7f0c006b;
         public static final int setSSIDPAS=0x7f0c0070;
