@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<items version="2" >
+
+    <item
+        jar="G:\Voodoo\Android\AndroidStudio\MyDHCP\app\build\intermediates\exploded-aar\com.android.support\design\23.1.1\jars\classes.jar"
+        jumboMode="true"
+        revision="21.1.2"
+        sha1="379471b2bd17d9737c050345c08e8c7d16589784">
+        <dex dex="G:\Voodoo\Android\AndroidStudio\MyDHCP\app\build\intermediates\pre-dexed\debug\com.android.support-design-23.1.1_81c1f55b3139e45144db1531021daaae8d13f6e4.jar" />
+    </item>
+    <item
+        jar="G:\Voodoo\Android\AndroidStudio\MyDHCP\app\build\intermediates\exploded-aar\com.android.support\appcompat-v7\23.1.1\jars\classes.jar"
+        jumboMode="true"
+        revision="21.1.2"
+        sha1="5c5699834e9722f1c288fea2de82725d078ba127">
+        <dex dex="G:\Voodoo\Android\AndroidStudio\MyDHCP\app\build\intermediates\pre-dexed\debug\com.android.support-appcompat-v7-23.1.1_ff8cce472f496a320479fee2d774d644613efd3b.jar" />
+    </item>
+    <item
+        jar="G:\Voodoo\Android\AndroidStudio\MyDHCP\app\build\intermediates\exploded-aar\com.android.support\support-v4\23.1.1\jars\classes.jar"
+        jumboMode="true"
+        revision="21.1.2"
+        sha1="6cbc7773921fcfedbe55657578f0cbfe614778dc">
+        <dex dex="G:\Voodoo\Android\AndroidStudio\MyDHCP\app\build\intermediates\pre-dexed\debug\com.android.support-support-v4-23.1.1_f21c36b7a793bec0b38b72e0dfc7ecd108b14f99.jar" />
+    </item>
+    <item
+        jar="D:\1.INSTALL\Android\SDK\extras\android\m2repository\com\android\support\support-annotations\23.1.1\support-annotations-23.1.1.jar"
+        jumboMode="true"
+        revision="21.1.2"
+        sha1="8d680ba5a623724d1fb0e81c36a790f023a6cede">
+        <dex dex="G:\Voodoo\Android\AndroidStudio\MyDHCP\app\build\intermediates\pre-dexed\debug\support-annotations-23.1.1_3a3af980470ef70ab4b89829605e0c41ecc72a68.jar" />
+    </item>
+    <item
+        jar="G:\Voodoo\Android\AndroidStudio\MyDHCP\app\build\intermediates\incremental-runtime-classes\debug\instant-run.jar"
+        jumboMode="true"
+        revision="21.1.2"
+        sha1="1600c56783ac7f0fc8c726977feabe27cdc6430f">
+        <dex dex="G:\Voodoo\Android\AndroidStudio\MyDHCP\app\build\intermediates\pre-dexed\debug\instant-run_738447d1fae371893741a3488f07f0cbd30f3102.jar" />
+    </item>
+    <item
+        jar="G:\Voodoo\Android\AndroidStudio\MyDHCP\app\build\intermediates\exploded-aar\com.android.support\support-v4\23.1.1\jars\libs\internal_impl-23.1.1.jar"
+        jumboMode="true"
+        revision="21.1.2"
+        sha1="a4de9c81ae239414e1ed0f86441b02abaf29bca9">
+        <dex dex="G:\Voodoo\Android\AndroidStudio\MyDHCP\app\build\intermediates\pre-dexed\debug\internal_impl-23.1.1_1c285d5c3066ef4fcc501514c881d7d5142b2919.jar" />
+    </item>
+    <item
+        jar="G:\Voodoo\Android\AndroidStudio\MyDHCP\app\build\intermediates\incremental-classes\debug\instant-run-bootstrap.jar"
+        jumboMode="true"
+        revision="21.1.2"
+        sha1="5662f42ac73ead9022271600d006f3c2cd12fa2e">
+        <dex dex="G:\Voodoo\Android\AndroidStudio\MyDHCP\app\build\intermediates\pre-dexed\debug\instant-run-bootstrap_6c10f5105bdf00b5ced55da3dbe0a39103941ec6.jar" />
+    </item>
+    <item
+        jar="G:\Voodoo\Android\AndroidStudio\MyDHCP\app\build\intermediates\exploded-aar\com.android.support\recyclerview-v7\23.1.1\jars\classes.jar"
+        jumboMode="true"
+        revision="21.1.2"
+        sha1="09c5e804bc67fc0580360043dff067df574a60d4">
+        <dex dex="G:\Voodoo\Android\AndroidStudio\MyDHCP\app\build\intermediates\pre-dexed\debug\com.android.support-recyclerview-v7-23.1.1_10990b308c3a09398c1fdb4700cf8396f3d43ac9.jar" />
+    </item>
+
+</items>
