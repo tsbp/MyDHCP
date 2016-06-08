@@ -28,7 +28,7 @@
             android:layout_marginBottom="70dp">
         </ListView>
 
-        <Button
+        <!--Button
             android:layout_width="50dp"
             android:layout_height="50dp"
             android:id="@+id/btnDel"
@@ -36,7 +36,7 @@
             android:enabled="false"
             android:layout_alignParentBottom="true"
             android:layout_alignParentLeft="true"
-            android:layout_marginLeft="25dp" />
+            android:layout_marginLeft="25dp" /-->
 
         <Button
             android:layout_width="50dp"
@@ -104,4 +104,4 @@
         android:visibility="invisible"
         android:layout_centerInParent="true"/>
 
-</RelativeLayout><!-- From: file:/E:/Github/MyDHCP/app/src/main/res/layout/activity_settings.xml -->
+</RelativeLayout>
