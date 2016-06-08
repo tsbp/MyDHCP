@@ -31,6 +31,8 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Locale;
 
+import com.example.mydhcp.Protocol;
+
 public class MainDHCPActivity extends Activity
 {
     TextView info1, info2,tvData, inTemp, outTemp;
@@ -119,7 +121,7 @@ public class MainDHCPActivity extends Activity
     void startLanSearch()
     {
         getPreferences();
-        if(wifii.isWifiEnabled())
+        //if(wifii.isWifiEnabled())
         {
             pbWait.setVisibility(View.VISIBLE);
             curIPbytes = scan_network();
@@ -127,13 +129,13 @@ public class MainDHCPActivity extends Activity
             continueLanSearch();
 
         }
-        else
-        {
-            Toast t = Toast.makeText(getApplicationContext(),
-                    "Wifi is off. Turn on wifi and restart app", Toast.LENGTH_LONG);
-            t.show();
-            btnStat.setBackgroundResource(R.drawable.wifi_off);
-        }
+//        else
+//        {
+//            Toast t = Toast.makeText(getApplicationContext(),
+//                    "Wifi is off. Turn on wifi and restart app", Toast.LENGTH_LONG);
+//            t.show();
+//            btnStat.setBackgroundResource(R.drawable.wifi_off);
+//        }
     }
     //==============================================================================================
     void continueLanSearch()
@@ -256,6 +258,8 @@ public class MainDHCPActivity extends Activity
     //==============================================================================================
     String ndString = "";
     public static String BC_ACTION = "I1";
+
+    public static byte[] _BC_ACTION = {Protocol.PLOT_DATA, 1};
     //==============================================================================================
     void dataProcessing (String aStr)
     {
@@ -305,23 +309,28 @@ public class MainDHCPActivity extends Activity
                 {
                     int msgNumber;
                     int msgCount;
-                    String dataType;
+                    byte dataType = 0;
                     try
                     {
                         msgNumber = Integer.parseInt(dataString.substring(1,2));
                         msgCount  = Integer.parseInt(dataString.substring(2,3));
-                        dataType =  dataString.substring(0,1);
+
+                        if      ((dataString.getBytes()[0]) == 'I')
+                            dataType = (byte)0x00;
+                        if (dataString.getBytes()[0] == 'O')
+                            dataType = (byte)0x80;
+
                         ndString += dataString;
                         if (msgNumber < msgCount)
                         {
-                            BC_ACTION = dataType +  (msgNumber + 1);
+                            _BC_ACTION[1] = (byte)(dataType + ((byte)((msgNumber + 1) & 0x0f)));
                             wifiRequestData(curIPbytes);
                         }
                         else if(msgNumber == msgCount)
                         {
-                           if(dataType.contains("I"))
+                           if((dataType & 0x80) == 0)
                            {
-                               dataType = "O";
+                               dataType = (byte)0x80;
 
                                // parse data
                                int[] inData = parseData("I", ndString);
@@ -332,7 +341,8 @@ public class MainDHCPActivity extends Activity
                                inTemp.setText(revertValue(ndString));
                                ndString = "";
 
-                               BC_ACTION = dataType +  1;
+                               //BC_ACTION = dataType +  1;
+                               _BC_ACTION[1] = (byte)(dataType + ((byte)((1) & 0x0f)));
                                wifiRequestData(curIPbytes);
                            }
                             else
@@ -345,6 +355,8 @@ public class MainDHCPActivity extends Activity
                                outTemp.setText(revertValue(ndString));
                                pbWait.setVisibility(View.INVISIBLE);
                                ndString = "";
+
+                               _BC_ACTION[1] = 1;
                            }
                         }
                     }

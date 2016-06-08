@@ -6,6 +6,7 @@ import java.net.DatagramPacket;
 import java.net.DatagramSocket;
 import java.net.InetAddress;
 import java.net.SocketTimeoutException;
+import java.sql.Time;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Locale;
@@ -13,28 +14,49 @@ import java.util.Locale;
 public class UDPAction extends AsyncTask<Void, Void, Void> {
 
     public static String BROADCAST_ACTION;
+    public static byte[] _BROADCAST_ACTION;
     public static InetAddress hostIP;
 
+
+
     String ret = "";
+    byte[] pack;
 
     //==========================================================================================
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
 
-            if      (MainDHCPActivity.mode == 3) BROADCAST_ACTION = settingsActivity.REQUEST_ACTION;
-            else if (MainDHCPActivity.mode == 4) BROADCAST_ACTION = LanConfigActivity.REQUEST_ACTION;
-            else if (MainDHCPActivity.mode == 5) BROADCAST_ACTION = ustanovki.REQUEST_ACTION;
-            else                                 BROADCAST_ACTION = MainDHCPActivity.BC_ACTION;
-
-            if(BROADCAST_ACTION.contains("I1"))
+            if      (MainDHCPActivity.mode == 3) pack = settingsActivity.REQUEST_ACTION.getBytes();
+            else if (MainDHCPActivity.mode == 4) pack = LanConfigActivity.REQUEST_ACTION.getBytes();
+            else if (MainDHCPActivity.mode == 5) pack = ustanovki.REQUEST_ACTION.getBytes();
+            else
             {
-                SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss", Locale.UK);
-                Calendar cal = Calendar.getInstance();
-                String timeString = dateFormat.format(cal.getTime());
-                BROADCAST_ACTION += timeString;
+                _BROADCAST_ACTION = MainDHCPActivity._BC_ACTION;
+                if(_BROADCAST_ACTION[0] == Protocol.PLOT_DATA)
+                {
+                    SimpleDateFormat dateFormat = new SimpleDateFormat("yyMMddHHmmss", Locale.UK);
+                    Calendar cal = Calendar.getInstance();
+                    String timeString = dateFormat.format(cal.getTime());
+
+                    byte[] timeBuf = new byte[6];
+                    for(int i = 0; i < 6; i++)
+                        timeBuf[i] = (byte)Integer.parseInt(timeString.substring(i*2,(i*2 +2)));
+
+                    pack = new byte[_BROADCAST_ACTION.length + timeBuf.length];
+
+                    for(int i = 0; i < _BROADCAST_ACTION.length; i++)
+                        pack[i] = _BROADCAST_ACTION[i];
+
+                    for(int i = 0; i <timeBuf.length; i++)
+                        pack[i + _BROADCAST_ACTION.length] = timeBuf[i];
+                }
             }
+
+
         }
+        //==========================================================================================
+        InetAddress returnIPAddress;
         //==========================================================================================
         @Override
         protected Void doInBackground(Void... params) {
@@ -44,8 +66,8 @@ public class UDPAction extends AsyncTask<Void, Void, Void> {
             {
                 ds = new DatagramSocket(7777);
                 DatagramPacket dp;
-                dp = new DatagramPacket(BROADCAST_ACTION.getBytes(),
-                                        BROADCAST_ACTION.getBytes().length,
+                dp = new DatagramPacket(pack,
+                                        pack.length,
                                         hostIP, 7777);
                 ds.setBroadcast(true);
                 ds.send(dp);
@@ -60,7 +82,7 @@ public class UDPAction extends AsyncTask<Void, Void, Void> {
                     ds.receive(receivePacket);
                     String modifiedSentence =
                             new String(receivePacket.getData());
-                    InetAddress returnIPAddress = receivePacket.getAddress();
+                    returnIPAddress = receivePacket.getAddress();
                     int port = receivePacket.getPort();
                     ret = returnIPAddress + ":" + port + "\r\ndata:" + modifiedSentence;
                 }
@@ -105,7 +127,7 @@ public class UDPAction extends AsyncTask<Void, Void, Void> {
         protected void onPostExecute(Void result) {
             super.onPostExecute(result);
             String st = ret;
-            if(ret.contains(BROADCAST_ACTION) && MainDHCPActivity.mode == 0)
+            if(returnIPAddress == hostIP)
                 st = "its my ip";
             //info2.setText(st);
 

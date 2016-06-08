@@ -4,27 +4,23 @@
     api-level="17"
     density="hdpi"
     format="7"
-    timestamp="4946520904269"
+    timestamp="981436998850"
     token="-6400942585167556857" >
 
     <task
         name="javac"
-        duration="557" />
+        duration="0" />
     <task
         name="instant-run-dex"
         duration="0" />
     <task
         name="instant-run-transform"
-        duration="351" />
+        duration="0" />
     <task
         name="verifier"
-        duration="187" />
+        duration="0" />
 
-    <artifact
-        location="G:\Voodoo\Android\AndroidStudio\MyDHCP\app\build\outputs\apk\app-debug.apk"
-        type="MAIN" />
-
-    <build timestamp="4946520904269" >
+    <build timestamp="22535490705079" >
         <artifact
             location="G:\Voodoo\Android\AndroidStudio\MyDHCP\app\build\outputs\apk\app-debug.apk"
             type="MAIN" />
