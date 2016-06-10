@@ -32,7 +32,7 @@ public class LanConfigActivity extends Activity {
         ssidpas  = (EditText) findViewById(R.id.setSSIDPAS);
 
         loadConfig();
-        MainDHCPActivity.mode = 4;
+        Protocol.mode = 4;
 
         Button okBtn = (Button) findViewById(R.id.okBtn);
         okBtn.setOnClickListener(new View.OnClickListener() {
@@ -52,7 +52,7 @@ public class LanConfigActivity extends Activity {
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        MainDHCPActivity.mode = 1;
+        Protocol.mode = 1;
     }
     //==============================================================================================
     void saveConfig() {

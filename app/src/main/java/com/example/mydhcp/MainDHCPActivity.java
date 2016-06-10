@@ -18,21 +18,10 @@ import android.widget.TextView;
 import android.net.*;
 import android.net.wifi.WifiManager;
 import android.widget.Toast;
-
-import java.io.File;
 import java.io.IOException;
 import java.math.BigInteger;
-import java.net.DatagramPacket;
-import java.net.DatagramSocket;
 import java.net.InetAddress;
-import java.net.SocketTimeoutException;
 import java.net.UnknownHostException;
-import java.text.SimpleDateFormat;
-import java.util.Calendar;
-import java.util.Locale;
-
-import com.example.mydhcp.Protocol;
-
 public class MainDHCPActivity extends Activity
 {
     TextView info1, info2,tvData, inTemp, outTemp;
@@ -47,12 +36,7 @@ public class MainDHCPActivity extends Activity
 
     int wifiRequest = 110, wifiRequestLow = 1;
 
-    final int ESP8266_SEARCH = 0;
-    final int ESP8266_DATA_RECEIVE = 1;
-    final int ESP8266_CONFIG = 3;
-    final int ESP8266_LANSET = 4;
-    final int ESP8266_UST = 5;
-    public static int mode;
+
 
     final boolean IP_IS_REACHABLE = true;
 
@@ -69,7 +53,7 @@ public class MainDHCPActivity extends Activity
         setContentView(R.layout.activity_main_dhcp);
         wifii = (WifiManager) getSystemService(Context.WIFI_SERVICE);
 
-        mode = ESP8266_SEARCH;
+        Protocol.mode = Protocol.ESP8266_SEARCH;
 
         //info1 =  (TextView) findViewById(R.id.tv1);
         // info2 =  (TextView) findViewById(R.id.tv2);
@@ -93,10 +77,12 @@ public class MainDHCPActivity extends Activity
             public void onClick(View v) {
                 ndString = "";
                 pbWait.setVisibility(View.VISIBLE);
-                BC_ACTION = "I1";
-                //UDPAction.BROADCAST_ACTION = BC_ACTION;
+                //BC_ACTION = "I1";
 
-                if(mode == ESP8266_SEARCH) startLanSearch();
+                _BC_ACTION[0] = Protocol.PLOT_DATA;
+                _BC_ACTION[1] = 0;
+
+                if( Protocol.mode ==  Protocol.ESP8266_SEARCH) startLanSearch();
                 else
                 {
                     wifiRequestData(curIPbytes);
@@ -108,7 +94,7 @@ public class MainDHCPActivity extends Activity
         //==========================================================================================
         setBtn.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                mode = ESP8266_CONFIG;
+                Protocol.mode =  Protocol.ESP8266_CONFIG;
                 Intent intent = new Intent(MainDHCPActivity.this, settingsActivity.class);
                 startActivity(intent);
             }
@@ -197,7 +183,7 @@ public class MainDHCPActivity extends Activity
     protected void onDestroy() {
         super.onDestroy();
         BC_ACTION = "I1";
-        mode = ESP8266_SEARCH;
+        Protocol.mode =  Protocol.ESP8266_SEARCH;
     }
     //==============================================================================================
     void getPreferences()
@@ -263,11 +249,13 @@ public class MainDHCPActivity extends Activity
     //==============================================================================================
     void dataProcessing (String aStr)
     {
-        switch(mode)
+        byte [] buffer;//aStr.getBytes();
+        buffer = UDPAction.answer;
+        switch( Protocol.mode)
         {
-            case ESP8266_SEARCH:
+            case  Protocol.ESP8266_SEARCH:
 
-                if (aStr.contains("NO DATA") || aStr.contains("its my ip"))
+                if (aStr.contains("NO DATA") || (buffer[0] != Protocol.PLOT_DATA_ANS))
                 {
                     ndString += aStr + " from IP:" + wifiRequest +"\r\n";
                     //info1.setText(ndString);
@@ -277,13 +265,13 @@ public class MainDHCPActivity extends Activity
                 }
                 else
                 {
-                    if(aStr.contains("I146"))
+                    if(buffer[0] == Protocol.PLOT_DATA_ANS/*aStr.contains("I146")*/)
                     {
                         //info2.setText("ESP8266 present on" + aStr);
                         ESP8266_PRESENT = true;
                         pbWait.setVisibility(View.INVISIBLE);
                         btnStat.setBackgroundResource(R.drawable.heater_icon);
-                        mode = ESP8266_DATA_RECEIVE;
+                        Protocol.mode =  Protocol.ESP8266_DATA_RECEIVE;
                         Toast t = Toast.makeText(getApplicationContext(),
                                 "Connected", Toast.LENGTH_SHORT);
                         t.setGravity(Gravity.BOTTOM, 0, 0);
@@ -301,107 +289,39 @@ public class MainDHCPActivity extends Activity
                     }
                 }
                 break;
-            case ESP8266_DATA_RECEIVE:
-                //======== check if pack is complete ===============================================
-                String dataString  = aStr.substring(aStr.indexOf("data:") +5, aStr.indexOf("data:") +35);
-                int a = dataString.indexOf("\n\r");
-                if(a == 28)
+
+            case  Protocol.ESP8266_DATA_RECEIVE:
+                if(buffer[0] == Protocol.PLOT_DATA_ANS)
                 {
-                    int msgNumber;
-                    int msgCount;
-                    byte dataType = 0;
-                    try
+                    short[] pData = new short[24];
+
+                    for(int i = 0; i < 24; i++)
+                        pData[i] = ((short)((buffer[1 + i*2] & 0xff) | ((buffer[1+ i*2 +1] & 0xff) << 8)));
+
+                    plot.aBuf = pData;
+                    String sign = "";
+                    if(pData[23] > 0) sign = "+";
+
+                    if((_BC_ACTION[1] >> 7) == 0)
                     {
-                        msgNumber = Integer.parseInt(dataString.substring(1,2));
-                        msgCount  = Integer.parseInt(dataString.substring(2,3));
+                        plot.aColor = new int[]{150, 102, 204, 255};
+                        inCanvas.invalidate();
+                        inTemp.setText(sign + String.valueOf(pData[23]).substring(0,2) + "." + String.valueOf(pData[23]).substring(2,3));
 
-                        if      ((dataString.getBytes()[0]) == 'I')
-                            dataType = (byte)0x00;
-                        if (dataString.getBytes()[0] == 'O')
-                            dataType = (byte)0x80;
-
-                        ndString += dataString;
-                        if (msgNumber < msgCount)
-                        {
-                            _BC_ACTION[1] = (byte)(dataType + ((byte)((msgNumber + 1) & 0x0f)));
-                            wifiRequestData(curIPbytes);
-                        }
-                        else if(msgNumber == msgCount)
-                        {
-                           if((dataType & 0x80) == 0)
-                           {
-                               dataType = (byte)0x80;
-
-                               // parse data
-                               int[] inData = parseData("I", ndString);
-                               plot.aBuf = inData;
-                               plot.aColor = new int[]{150, 102, 204, 255};
-                               inCanvas.invalidate();
-
-                               inTemp.setText(revertValue(ndString));
-                               ndString = "";
-
-                               //BC_ACTION = dataType +  1;
-                               _BC_ACTION[1] = (byte)(dataType + ((byte)((1) & 0x0f)));
-                               wifiRequestData(curIPbytes);
-                           }
-                            else
-                           {
-                               int[] outData = parseData("O", ndString);
-                               plot.aBuf = outData;
-                               plot.aColor = new int[]{120, 255, 255, 0};
-                               outCanvas.invalidate();
-
-                               outTemp.setText(revertValue(ndString));
-                               pbWait.setVisibility(View.INVISIBLE);
-                               ndString = "";
-
-                               _BC_ACTION[1] = 1;
-                           }
-                        }
+                        _BC_ACTION[0] = Protocol.PLOT_DATA;
+                        _BC_ACTION[1] = (byte)0x80;
+                        wifiRequestData(curIPbytes);
                     }
-                    catch(Exception e)
+                    else
                     {
-                        ndString = "Error";
+                        plot.aColor = new int[]{120, 255, 255, 0};
+                        outCanvas.invalidate();
+                        outTemp.setText(sign + String.valueOf(pData[23]).substring(0,2) + "." + String.valueOf(pData[23]).substring(2,3));
+                        pbWait.setVisibility(View.INVISIBLE);
                     }
                 }
-                else wifiRequestData(curIPbytes);
-                //tvData.setText(ndString);
-                //==================================================================================
-                break;
+        }
+    }
 
-        }
-    }
-    //==============================================================================================
-    int [] parseData(String aDataRef, String aDataString)
-    {
-        int [] dataBuf = new int[24];
-        int bCounter = 0;
-        for(int k = 0; k < 4; k++)
-        {
-           // int l = aDataString.length();
-            String tmpStr = aDataString.substring(k*30, k*30 + 30);//30 = 4+6*4+2
-            if(tmpStr.substring(0,1).contains(aDataRef))
-            {
-                for(int i = 0; i < 6; i++)
-                {
-                    String s = tmpStr.substring(4+i*4, 8+i*4);
-                    dataBuf[bCounter]= Integer.parseInt(s.substring(1));
-                    if (s.contains("-")) dataBuf[bCounter] *= -1;
-                    bCounter++;
-                }
-            }
-        }
-        return dataBuf;
-    }
-    //==============================================================================================
-    String revertValue(String aStr)
-    {
-        String ss = aStr.substring(aStr.length() - 6, aStr.length() - 3);
-        ss = ss.replace("00", "0") + ".";
-        if (ss.contains("+0") && !ss.contains("+0.")) ss = ss.replace("+0", "+");
-        if (ss.contains("-0") && !ss.contains("-0.")) ss = ss.replace("-0", "-");
-        return (ss + aStr.substring(aStr.length() - 3, aStr.length() - 2));
-    }
 }
 

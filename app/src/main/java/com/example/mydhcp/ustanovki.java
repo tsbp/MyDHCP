@@ -31,7 +31,7 @@ public class ustanovki extends Activity {
         delta = (TextView)(findViewById(R.id.delta));
         swap = (CheckBox)(findViewById(R.id.chbSensSwap));
 
-        MainDHCPActivity.mode = 5;
+        Protocol.mode = 5;
 
         REQUEST_ACTION = "GUST";
         wifiRequestData(MainDHCPActivity.curIPbytes);
@@ -44,7 +44,7 @@ public class ustanovki extends Activity {
                 if(swap.isChecked())REQUEST_ACTION += "S1";
                 else                REQUEST_ACTION += "S0";
                 wifiRequestData(MainDHCPActivity.curIPbytes);
-                MainDHCPActivity.mode = 1;
+                Protocol.mode = 1;
                 finish();
             }
         });
@@ -54,7 +54,7 @@ public class ustanovki extends Activity {
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        MainDHCPActivity.mode = 1;
+        Protocol.mode = 1;
     }
     //==============================================================================================
     boolean wifiRequestData (byte[] aBytes)

@@ -13,11 +13,10 @@ import java.util.Locale;
 
 public class UDPAction extends AsyncTask<Void, Void, Void> {
 
-    public static String BROADCAST_ACTION;
+
     public static byte[] _BROADCAST_ACTION;
     public static InetAddress hostIP;
-
-
+    public static byte [] answer;
 
     String ret = "";
     byte[] pack;
@@ -27,40 +26,52 @@ public class UDPAction extends AsyncTask<Void, Void, Void> {
         protected void onPreExecute() {
             super.onPreExecute();
 
-            if      (MainDHCPActivity.mode == 3) pack = settingsActivity.REQUEST_ACTION.getBytes();
-            else if (MainDHCPActivity.mode == 4) pack = LanConfigActivity.REQUEST_ACTION.getBytes();
-            else if (MainDHCPActivity.mode == 5) pack = ustanovki.REQUEST_ACTION.getBytes();
-            else
+            switch(Protocol.mode)
             {
-                _BROADCAST_ACTION = MainDHCPActivity._BC_ACTION;
-                if(_BROADCAST_ACTION[0] == Protocol.PLOT_DATA)
-                {
-                    SimpleDateFormat dateFormat = new SimpleDateFormat("yyMMddHHmmss", Locale.UK);
-                    Calendar cal = Calendar.getInstance();
-                    String timeString = dateFormat.format(cal.getTime());
+                case Protocol.ESP8266_SEARCH:
+                case Protocol.ESP8266_DATA_RECEIVE:
+                    _BROADCAST_ACTION = MainDHCPActivity._BC_ACTION;
+                    if(_BROADCAST_ACTION[0] == Protocol.PLOT_DATA)
+                    {
+                        SimpleDateFormat dateFormat = new SimpleDateFormat("yyMMddHHmmss", Locale.UK);
+                        Calendar cal = Calendar.getInstance();
+                        String timeString = dateFormat.format(cal.getTime());
 
-                    byte[] timeBuf = new byte[6];
-                    for(int i = 0; i < 6; i++)
-                        timeBuf[i] = (byte)Integer.parseInt(timeString.substring(i*2,(i*2 +2)));
+                        byte[] timeBuf = new byte[6];
+                        for(int i = 0; i < 6; i++)
+                            timeBuf[i] = (byte)Integer.parseInt(timeString.substring(i*2,(i*2 +2)));
 
-                    pack = new byte[_BROADCAST_ACTION.length + timeBuf.length];
+                        pack = new byte[_BROADCAST_ACTION.length + timeBuf.length];
 
-                    for(int i = 0; i < _BROADCAST_ACTION.length; i++)
-                        pack[i] = _BROADCAST_ACTION[i];
+                        for(int i = 0; i < _BROADCAST_ACTION.length; i++)
+                            pack[i] = _BROADCAST_ACTION[i];
 
-                    for(int i = 0; i <timeBuf.length; i++)
-                        pack[i + _BROADCAST_ACTION.length] = timeBuf[i];
-                }
+                        for(int i = 0; i <timeBuf.length; i++)
+                            pack[i + _BROADCAST_ACTION.length] = timeBuf[i];
+                    }
+                    break;
+
+                case Protocol.ESP8266_CONFIG:
+                    pack = settingsActivity._BC_ACTION;
+                    break;
+
+                case Protocol.ESP8266_LANSET:
+                    pack = LanConfigActivity.REQUEST_ACTION.getBytes();
+                    break;
+
+                case Protocol.ESP8266_UST:
+                    pack = ustanovki.REQUEST_ACTION.getBytes();
+                    break;
             }
-
-
         }
         //==========================================================================================
-        InetAddress returnIPAddress;
+        private InetAddress returnIPAddress;
+
         //==========================================================================================
         @Override
         protected Void doInBackground(Void... params) {
 
+            answer = null;
             DatagramSocket ds = null;
             try
             {
@@ -82,9 +93,11 @@ public class UDPAction extends AsyncTask<Void, Void, Void> {
                     ds.receive(receivePacket);
                     String modifiedSentence =
                             new String(receivePacket.getData());
+                    answer = receivePacket.getData();
                     returnIPAddress = receivePacket.getAddress();
-                    int port = receivePacket.getPort();
-                    ret = returnIPAddress + ":" + port + "\r\ndata:" + modifiedSentence;
+//                    int port = receivePacket.getPort();
+                    //ret = returnIPAddress + ":" + port + "\r\ndata:" + modifiedSentence;
+                    ret = new String(answer);
                 }
                 catch (SocketTimeoutException ste)
                 {
@@ -129,7 +142,7 @@ public class UDPAction extends AsyncTask<Void, Void, Void> {
             String st = ret;
             if(returnIPAddress == hostIP)
                 st = "its my ip";
-            //info2.setText(st);
+//            //info2.setText(st);
 
             if(this._task_finished_event != null)
             {

@@ -12,14 +12,14 @@ import android.view.View;
 public class plot extends View {
 
     Paint p;
-    public static int[] aBuf;
+    public static short[] aBuf;
     public static int[] aColor;
 
     public plot(Context context, AttributeSet attrs) {
         super(context, attrs);
 
         p = new Paint();
-        aBuf = new int[]{102,334,223,123,256,278,267,345,456,234,345,234,
+        aBuf = new short[]{102,334,223,123,256,278,267,345,456,234,345,234,
                 222,222,222,222,222,222,222,222,222,222,222,222};
         aColor = new int []{150, 102, 204, 255};
 
