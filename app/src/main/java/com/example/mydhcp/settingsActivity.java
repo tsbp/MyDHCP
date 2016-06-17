@@ -314,7 +314,8 @@ public class settingsActivity extends Activity {
                             tmpTemp.toArray(temp);
                             sortByTime();
                             updateListviewTemperature();
-                            bSave.setVisibility(View.VISIBLE);
+                            if(time.length != 0) bSave.setVisibility(View.VISIBLE);
+                            else  bSave.setVisibility(View.INVISIBLE);
                         }
                     }});
                 adb.show();
