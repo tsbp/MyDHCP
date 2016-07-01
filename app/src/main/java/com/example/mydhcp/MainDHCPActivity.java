@@ -306,7 +306,7 @@ public class MainDHCPActivity extends Activity
                     {
                         plot.aColor = new int[]{150, 102, 204, 255};
                         inCanvas.invalidate();
-                        inTemp.setText(sign + String.valueOf(pData[23]).substring(0,2) + "." + String.valueOf(pData[23]).substring(2,3));
+                        inTemp.setText(sign + String.valueOf((float)pData[23] / 10));
 
                         _BC_ACTION[0] = Protocol.PLOT_DATA;
                         _BC_ACTION[1] = (byte)0x80;
@@ -316,7 +316,7 @@ public class MainDHCPActivity extends Activity
                     {
                         plot.aColor = new int[]{120, 255, 255, 0};
                         outCanvas.invalidate();
-                        outTemp.setText(sign + String.valueOf(pData[23]).substring(0,2) + "." + String.valueOf(pData[23]).substring(2,3));
+                        outTemp.setText(sign + String.valueOf((float)pData[23] / 10));//String.valueOf(pData[23]).substring(0,2) + "." + String.valueOf(pData[23]).substring(2,3));
                         pbWait.setVisibility(View.INVISIBLE);
                     }
                 }

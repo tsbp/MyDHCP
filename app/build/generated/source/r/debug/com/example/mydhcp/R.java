@@ -2267,8 +2267,8 @@ containing a value of this type.
         public static final int dayType=0x7f0c0080;
         public static final int decor_content_parent=0x7f0c0058;
         public static final int default_activity_button=0x7f0c0040;
-        public static final int delta=0x7f0c00a6;
         public static final int delta_name=0x7f0c00a5;
+        public static final int delta_value=0x7f0c00a6;
         public static final int design_menu_item_action_area=0x7f0c008f;
         public static final int design_menu_item_action_area_stub=0x7f0c008e;
         public static final int design_menu_item_text=0x7f0c008d;

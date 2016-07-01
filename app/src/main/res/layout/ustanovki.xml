@@ -10,14 +10,19 @@
         android:id="@+id/delta_name"
         android:layout_marginTop="50dp"
         android:layout_gravity="center_horizontal" />
-
-    <EditText
-        android:layout_width="80dp"
+    <TextView
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:inputType="numberDecimal"
-        android:ems="10"
-        android:id="@+id/delta"
+        android:id="@+id/delta_value"
+        android:textSize="50dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="30dp"
         android:layout_gravity="center_horizontal" />
+
+    <SeekBar
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/seekBar"        />
 
     <CheckBox
         android:layout_width="wrap_content"

@@ -60,7 +60,7 @@ public class UDPAction extends AsyncTask<Void, Void, Void> {
                     break;
 
                 case Protocol.ESP8266_UST:
-                    pack = ustanovki.REQUEST_ACTION.getBytes();
+                    pack = ustanovki.REQUEST_ACTION;
                     break;
             }
         }
@@ -91,8 +91,8 @@ public class UDPAction extends AsyncTask<Void, Void, Void> {
 
                 try {
                     ds.receive(receivePacket);
-                    String modifiedSentence =
-                            new String(receivePacket.getData());
+//                    String modifiedSentence =
+//                            new String(receivePacket.getData());
                     answer = receivePacket.getData();
                     returnIPAddress = receivePacket.getAddress();
 //                    int port = receivePacket.getPort();

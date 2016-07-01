@@ -17,14 +17,14 @@ public class Protocol {
     public static final byte READ_WEEK_CONFIGS	=		(0x30);
     public static final byte READ_WEEK_CONFIGS_ANS	=	(0x31);
     public static final byte SAVE_WEEK_CONFIGS	=		(0x32);
-    //public static final byte SAVE_WEEK_CONFIGS_ANS	=	(0x33);
 
     public static final byte READ_DAY_CONFIGS	=		(0x33);
     public static final byte READ_DAY_CONFIGS_ANS	=	(0x34);
     public static final byte SAVE_DAY_CONFIGS	=		(0x35);
 
-    public static final byte READ_USTANOVKI	=			(0x34);
-    public static final byte SAVE_USTANOVKI	=			(0x35);
+    public static final byte READ_USTANOVKI			=		(0x36);
+    public static final byte READ_USTANOVKI_ANS		=		(0x37);
+    public static final byte SAVE_USTANOVKI			=		(0x38);
 
 
     public static final byte ESP8266_SEARCH = 0;

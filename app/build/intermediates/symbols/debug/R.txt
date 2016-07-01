@@ -621,8 +621,8 @@ int id customPanel 0x7f0c004f
 int id dayType 0x7f0c0080
 int id decor_content_parent 0x7f0c0058
 int id default_activity_button 0x7f0c0040
-int id delta 0x7f0c00a6
 int id delta_name 0x7f0c00a5
+int id delta_value 0x7f0c00a6
 int id design_menu_item_action_area 0x7f0c008f
 int id design_menu_item_action_area_stub 0x7f0c008e
 int id design_menu_item_text 0x7f0c008d
