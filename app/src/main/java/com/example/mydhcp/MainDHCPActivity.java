@@ -170,10 +170,10 @@ public class MainDHCPActivity extends Activity
                 intent = new Intent(MainDHCPActivity.this, LanConfigActivity.class);
                 startActivity(intent);
                 break;
-            case  R.id.espSettings:
-                intent = new Intent(MainDHCPActivity.this, ustanovki.class);
-                startActivity(intent);
-                break;
+//            case  R.id.espSettings:
+//                intent = new Intent(MainDHCPActivity.this, ustanovki.class);
+//                startActivity(intent);
+//                break;
         }
 
         return super.onOptionsItemSelected(item);

@@ -48,12 +48,12 @@
         "source": "G:\\Voodoo\\Android\\AndroidStudio\\MyDHCP\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.1.1\\res\\layout\\abc_list_menu_item_checkbox.xml"
     },
     {
-        "merged": "G:\\Voodoo\\Android\\AndroidStudio\\MyDHCP\\app\\build\\intermediates\\res\\merged\\debug\\layout\\abc_alert_dialog_material.xml",
-        "source": "G:\\Voodoo\\Android\\AndroidStudio\\MyDHCP\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.1.1\\res\\layout\\abc_alert_dialog_material.xml"
-    },
-    {
         "merged": "G:\\Voodoo\\Android\\AndroidStudio\\MyDHCP\\app\\build\\intermediates\\res\\merged\\debug\\layout\\abc_action_mode_bar.xml",
         "source": "G:\\Voodoo\\Android\\AndroidStudio\\MyDHCP\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.1.1\\res\\layout\\abc_action_mode_bar.xml"
+    },
+    {
+        "merged": "G:\\Voodoo\\Android\\AndroidStudio\\MyDHCP\\app\\build\\intermediates\\res\\merged\\debug\\layout\\abc_alert_dialog_material.xml",
+        "source": "G:\\Voodoo\\Android\\AndroidStudio\\MyDHCP\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.1.1\\res\\layout\\abc_alert_dialog_material.xml"
     },
     {
         "merged": "G:\\Voodoo\\Android\\AndroidStudio\\MyDHCP\\app\\build\\intermediates\\res\\merged\\debug\\layout\\abc_list_menu_item_layout.xml",
@@ -92,12 +92,12 @@
         "source": "G:\\Voodoo\\Android\\AndroidStudio\\MyDHCP\\app\\src\\main\\res\\layout\\activity_lan_config.xml"
     },
     {
-        "merged": "G:\\Voodoo\\Android\\AndroidStudio\\MyDHCP\\app\\build\\intermediates\\res\\merged\\debug\\layout\\notification_template_lines.xml",
-        "source": "G:\\Voodoo\\Android\\AndroidStudio\\MyDHCP\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.1.1\\res\\layout\\notification_template_lines.xml"
-    },
-    {
         "merged": "G:\\Voodoo\\Android\\AndroidStudio\\MyDHCP\\app\\build\\intermediates\\res\\merged\\debug\\layout\\design_navigation_item_subheader.xml",
         "source": "G:\\Voodoo\\Android\\AndroidStudio\\MyDHCP\\app\\build\\intermediates\\exploded-aar\\com.android.support\\design\\23.1.1\\res\\layout\\design_navigation_item_subheader.xml"
+    },
+    {
+        "merged": "G:\\Voodoo\\Android\\AndroidStudio\\MyDHCP\\app\\build\\intermediates\\res\\merged\\debug\\layout\\notification_template_lines.xml",
+        "source": "G:\\Voodoo\\Android\\AndroidStudio\\MyDHCP\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.1.1\\res\\layout\\notification_template_lines.xml"
     },
     {
         "merged": "G:\\Voodoo\\Android\\AndroidStudio\\MyDHCP\\app\\build\\intermediates\\res\\merged\\debug\\layout\\abc_screen_content_include.xml",

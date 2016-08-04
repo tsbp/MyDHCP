@@ -28,15 +28,14 @@
             android:layout_marginBottom="70dp">
         </ListView>
 
-        <!--Button
-            android:layout_width="50dp"
-            android:layout_height="50dp"
-            android:id="@+id/btnDel"
-            android:background="@drawable/bdel"
-            android:enabled="false"
+        <Button
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:id="@+id/btnSave"
+            android:background="@drawable/bsave"
             android:layout_alignParentBottom="true"
             android:layout_alignParentLeft="true"
-            android:layout_marginLeft="25dp" /-->
+            android:layout_marginLeft="10dp"/>
 
         <Button
             android:layout_width="50dp"
@@ -44,21 +43,13 @@
             android:id="@+id/btnAdd"
             android:enabled="false"
             android:background="@drawable/badd"
+            android:layout_marginRight="25dp"
             android:layout_alignParentBottom="true"
-            android:layout_alignParentRight="true"
-            android:layout_marginRight="25dp" />
+            android:layout_alignParentRight="true" />
 
     </RelativeLayout>
 
-    <Button
-        android:layout_width="60dp"
-        android:layout_height="60dp"
-        android:id="@+id/btnSave"
-        android:background="@drawable/bsave"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentLeft="true"
-        android:layout_marginLeft="10dp"
-        android:layout_marginBottom="10dp" />
+
 
     <Button
         android:layout_width="60dp"
@@ -90,11 +81,21 @@
         android:layout_marginRight="10dp"
         android:layout_marginBottom="10dp"/>
 
+    <Button
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:id="@+id/btnDelta"
+        android:background="@drawable/plot"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft ="true"
+        android:layout_marginLeft="10dp"
+        android:layout_marginBottom="10dp"/>
+
     <TextView
         android:layout_width="fill_parent"
         android:layout_height="40dp"
         android:id="@+id/confResponse"
-        android:layout_above="@+id/btnSave"
+        android:layout_above="@+id/btnLoad"
         android:gravity="center"/>
 
     <ProgressBar

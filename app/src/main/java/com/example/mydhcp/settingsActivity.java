@@ -67,15 +67,24 @@ public class settingsActivity extends Activity {
         Button bLoad = (Button) findViewById(R.id.btnLoad);
         Button bLoadHolly = (Button) findViewById(R.id.btnLoadHolly);
         bAdd  = (Button) findViewById(R.id.btnAdd);
-        bAdd.setVisibility(View.GONE);
+        bAdd.setVisibility(View.INVISIBLE);
         //bDel  = (Button) findViewById(R.id.btnDel);
         Button bWeek = (Button) findViewById(R.id.btnWeek);
+        Button bDelta = (Button) findViewById(R.id.btnDelta);
+        //================================================
+        bDelta.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+              Intent intent = new Intent(settingsActivity.this, ustanovki.class);
+                startActivity(intent);
+            }
+        });
         //================================================
         bSave.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 switch(mode)
                 {
                     case MODE_RECEIVE_WEEK:
+                        //bAdd.setVisibility(View.INVISIBLE);
                         mode = MODE_SEND_WEEK;
                         _BC_ACTION = new byte[8];
                         _BC_ACTION[0] = Protocol.SAVE_WEEK_CONFIGS;
@@ -100,7 +109,7 @@ public class settingsActivity extends Activity {
                         }
                         break;
                 }
-                bSave.setVisibility(View.GONE);
+                //bSave.setVisibility(View.GONE);
                 //cgfChanged = 0;
             }
         });
@@ -371,41 +380,44 @@ public class settingsActivity extends Activity {
     private void dataProcessing (String aStr)
     {
         tvResp.setText(aStr);
-        bAdd.setEnabled(true);
-        bAdd.setVisibility(View.VISIBLE);
+//        bAdd.setEnabled(true);
+//        bAdd.setVisibility(View.VISIBLE);
         //bDel.setEnabled(true);
 
         switch(mode)
         {
             case MODE_RECEIVE_CONFIG:
-                receiveConfig( aStr.substring(aStr.indexOf("data:") + 5, aStr.length()));
+                receiveConfig();
+                bAdd.setEnabled(true);
+                bAdd.setVisibility(View.VISIBLE);
                 break;
 
             case MODE_SEND_CONFIG:
                 if(aStr.length() > 10)
-                    sendConfig(aStr.substring(aStr.indexOf("data:") + 5, aStr.length()));
+                    sendConfig();
                 break;
 
             case MODE_RECEIVE_WEEK:
                 bAdd.setEnabled(false);
-                bAdd.setVisibility(View.GONE);
+                bAdd.setVisibility(View.INVISIBLE);
                 //bDel.setEnabled(false);
                 receiveWeek();
                 break;
 
             case MODE_SEND_WEEK:
-                sendWeek(aStr.substring(aStr.indexOf("data:") + 5, aStr.length()));
+                sendWeek();
                 break;
         }
 
        // ret = "no answer";
     }
     //==============================================================================================
-    private void sendWeek(String resp)
+    private void sendWeek()
     {
         if(UDPAction.answer[0] == Protocol.OK_ANS)
         {
             pb.setVisibility(View.INVISIBLE);
+            bSave.setVisibility(View.INVISIBLE);
             tvResp.setText(R.string.saved);
             mode = MODE_RECEIVE_WEEK;
         }
@@ -436,7 +448,7 @@ public class settingsActivity extends Activity {
         }
     }
     //==============================================================================================
-    private void sendConfig(String resp)
+    private void sendConfig()
     {
         if(UDPAction.answer[0] == Protocol.OK_ANS)
         {
@@ -449,6 +461,7 @@ public class settingsActivity extends Activity {
             }
             else
             {
+                bSave.setVisibility(View.GONE);
                 pb.setVisibility(View.INVISIBLE);
                 tvResp.setText(R.string.saved);
                 mode = MODE_RECEIVE_CONFIG;
@@ -461,7 +474,7 @@ public class settingsActivity extends Activity {
         }
     }
     //==============================================================================================
-    private void receiveConfig(String resp)
+    private void receiveConfig()
     {
         String s;
 

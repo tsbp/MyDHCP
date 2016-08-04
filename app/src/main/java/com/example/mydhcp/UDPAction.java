@@ -55,9 +55,9 @@ public class UDPAction extends AsyncTask<Void, Void, Void> {
                     pack = settingsActivity._BC_ACTION;
                     break;
 
-                case Protocol.ESP8266_LANSET:
-                    pack = LanConfigActivity.REQUEST_ACTION.getBytes();
-                    break;
+//                case Protocol.ESP8266_LANSET:
+//                    pack = LanConfigActivity.REQUEST_ACTION.getBytes();
+//                    break;
 
                 case Protocol.ESP8266_UST:
                     pack = ustanovki.REQUEST_ACTION;

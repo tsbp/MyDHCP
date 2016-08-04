@@ -3,6 +3,6 @@
     xmlns:tools="http://schemas.android.com/tools" tools:context=".MainDHCPActivity">
     <item android:id="@+id/lanSettings" android:title="@string/lanSettings"
           android:orderInCategory="100" app:showAsAction="never" />
-    <item android:id="@+id/espSettings" android:title="@string/espSettings"
-        android:orderInCategory="100" app:showAsAction="never" />
+    <!--item android:id="@+id/espSettings" android:title="@string/espSettings"
+        android:orderInCategory="100" app:showAsAction="never" /-->
 </menu>
