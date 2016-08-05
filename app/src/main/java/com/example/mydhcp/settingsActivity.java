@@ -118,6 +118,7 @@ public class settingsActivity extends Activity {
             public void onClick(View v) {
 
                 bSave.setVisibility(View.INVISIBLE);
+                Protocol.mode = Protocol.ESP8266_CONFIG;
                 mode = MODE_RECEIVE_WEEK;
                 _BC_ACTION[0] = Protocol.READ_WEEK_CONFIGS;
                 pb.setVisibility(View.VISIBLE);
@@ -131,6 +132,7 @@ public class settingsActivity extends Activity {
 
                 bSave.setVisibility(View.INVISIBLE);
                 mode = MODE_RECEIVE_CONFIG;
+                Protocol.mode = Protocol.ESP8266_CONFIG;
                 _BC_ACTION = new byte[2];
                 _BC_ACTION[0] = Protocol.READ_DAY_CONFIGS;
                 _BC_ACTION[1] = (byte)0x01;
@@ -145,6 +147,7 @@ public class settingsActivity extends Activity {
 
                 bSave.setVisibility(View.INVISIBLE);
                 mode = MODE_RECEIVE_CONFIG;
+                Protocol.mode = Protocol.ESP8266_CONFIG;
                 _BC_ACTION = new byte[2];
                 _BC_ACTION[0] = Protocol.READ_DAY_CONFIGS;
                 _BC_ACTION[1] = (byte)0x81;
