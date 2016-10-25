@@ -130,6 +130,8 @@ public class settingsActivity extends Activity {
         bLoad.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
 
+                time = new String[0];
+                temp = new String[0];
                 bSave.setVisibility(View.INVISIBLE);
                 mode = MODE_RECEIVE_CONFIG;
                 Protocol.mode = Protocol.ESP8266_CONFIG;
@@ -145,6 +147,8 @@ public class settingsActivity extends Activity {
         bLoadHolly.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
 
+                time = new String[0];
+                temp = new String[0];
                 bSave.setVisibility(View.INVISIBLE);
                 mode = MODE_RECEIVE_CONFIG;
                 Protocol.mode = Protocol.ESP8266_CONFIG;
@@ -161,6 +165,11 @@ public class settingsActivity extends Activity {
         //================================================
         bAdd.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
+                if(time == null)
+                {
+                    time = new String[0];
+                    temp = new String[0];
+                }
                 if(time.length < 9)
                 {
                     List<String> tmpTime = new ArrayList<>();
@@ -268,22 +277,26 @@ public class settingsActivity extends Activity {
     private void updateListviewTemperature()
     {
 
-        ArrayList<Map<String, Object>> data = new ArrayList<>(
-                time.length);
-        Map<String, Object> m;
-        for (int i = 0; i < time.length; i++) {
-            m = new HashMap<>();
-            m.put(ATTRIBUTE_NAME_REF, i+1);
-            m.put(ATTRIBUTE_NAME_TIME, time[i]);
-            m.put(ATTRIBUTE_NAME_TEMP, temp[i]);
+        try {
+            ArrayList<Map<String, Object>> data = new ArrayList<>(
+                    time.length);
+            Map<String, Object> m;
+            for (int i = 0; i < time.length; i++) {
 
-            data.add(m);
-        }
-        String[] from = {ATTRIBUTE_NAME_REF, ATTRIBUTE_NAME_TIME, ATTRIBUTE_NAME_TEMP};
-        int[] to = {R.id.tvRef, R.id.tvTime, R.id.tvTemp};
-        SimpleAdapter sAdapter = new SimpleAdapter(this, data, R.layout.item, from, to);
-        lvMain = (ListView) findViewById(R.id.lvMain);
-        lvMain.setAdapter(sAdapter);
+                m = new HashMap<>();
+                m.put(ATTRIBUTE_NAME_REF, i + 1);
+                m.put(ATTRIBUTE_NAME_TIME, time[i]);
+                m.put(ATTRIBUTE_NAME_TEMP, temp[i]);
+
+                data.add(m);
+
+            }
+            String[] from = {ATTRIBUTE_NAME_REF, ATTRIBUTE_NAME_TIME, ATTRIBUTE_NAME_TEMP};
+            int[] to = {R.id.tvRef, R.id.tvTime, R.id.tvTemp};
+            SimpleAdapter sAdapter = new SimpleAdapter(this, data, R.layout.item, from, to);
+            lvMain = (ListView) findViewById(R.id.lvMain);
+            lvMain.setAdapter(sAdapter);
+
         //==========================================================
         lvMain.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             public void onItemClick(AdapterView<?> parent, View view,
@@ -334,6 +347,8 @@ public class settingsActivity extends Activity {
                 return true;
             }
         });
+        }
+        catch(Exception e){tvResp.setText("Error in data");};
     }
     //==============================================================================================
     @Override
@@ -494,14 +509,17 @@ public class settingsActivity extends Activity {
                 if(UDPAction.answer[3] < 10)  a = "0";
                 if(UDPAction.answer[4] < 10)  b = "0";
 
-                aStrings.add(a + String.valueOf(UDPAction.answer[3]) + ":" + b + String.valueOf(UDPAction.answer[4]));
-                a = new String (((UDPAction.answer[5] &0xff)| (UDPAction.answer[6] & 0xff) << 8) + "");
-                bStrings.add(a.substring(0,2) + "." + a.substring(2,3));
+                try {
+                    aStrings.add(a + String.valueOf(UDPAction.answer[3]) + ":" + b + String.valueOf(UDPAction.answer[4]));
+                    a = new String(((UDPAction.answer[5] & 0xff) | (UDPAction.answer[6] & 0xff) << 8) + "");
+                    bStrings.add(a.substring(0, 2) + "." + a.substring(2, 3));
 
-                time = new String[aStrings.size()];
-                temp = new String[bStrings.size()];
-                time = aStrings.toArray(time);
-                temp = bStrings.toArray(temp);
+                    time = new String[aStrings.size()];
+                    temp = new String[bStrings.size()];
+                    time = aStrings.toArray(time);
+                    temp = bStrings.toArray(temp);
+                }
+                catch (Exception e){}
 
                 updateListviewTemperature();
                 pb.setVisibility(View.INVISIBLE);
