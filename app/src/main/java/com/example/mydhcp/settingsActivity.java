@@ -255,23 +255,28 @@ public class settingsActivity extends Activity {
     //==============================================================================================
     private void sortByTime()
     {
-        for(int i = 0; i < time.length; i++)
+        try
         {
-            for(int j = i+1; j < time.length; j++)
+            for(int i = 0; i < time.length; i++)
             {
-                String tStrA = time[i].replace(":","");
-                String tStrB = time[j].replace(":","");
-                if (Integer.valueOf(tStrA) > Integer.valueOf(tStrB))
+                for(int j = i+1; j < time.length; j++)
                 {
-                    String t = time[i];
-                    time[i] = time[j];
-                    time[j] = t;
-                    String tt = temp[i];
-                    temp[i] = temp[j];
-                    temp[j]= tt;
+                    String tStrA = time[i].replace(":","");
+                    String tStrB = time[j].replace(":","");
+                    if (Integer.valueOf(tStrA) > Integer.valueOf(tStrB))
+                    {
+                        String t = time[i];
+                        time[i] = time[j];
+                        time[j] = t;
+                        String tt = temp[i];
+                        temp[i] = temp[j];
+                        temp[j]= tt;
+                    }
                 }
             }
         }
+        catch(Exception e){}
+
     }
     //==============================================================================================
     private void updateListviewTemperature()
@@ -321,7 +326,8 @@ public class settingsActivity extends Activity {
                 adb.setNegativeButton("Cancel", null);
                 adb.setPositiveButton("Ok", new AlertDialog.OnClickListener() {
                     public void onClick(DialogInterface dialog, int which) {
-                        if (time != null) {
+                        if (time != null)
+                        {
                             List<String> tmpTime = new ArrayList<>();
                             List<String> tmpTemp = new ArrayList<>();
                             for (int k = 0; k < position; k++) {
@@ -503,7 +509,7 @@ public class settingsActivity extends Activity {
             int msgNumb    = (int)UDPAction.answer[1];
             int partsCount = (int)UDPAction.answer[2];
 
-            if(msgNumb >= partsCount)
+            if(msgNumb >= partsCount || msgNumb >9)
             {
                 String a = "", b = "";
                 if(UDPAction.answer[3] < 10)  a = "0";
